@@ -181,6 +181,66 @@
             }
         }
 
+        .rain-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            display: none;
+        }
+
+        .raindrop {
+            position: absolute;
+            width: 1px;
+            height: 15px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+            animation: rain linear infinite;
+        }
+
+        @keyframes rain {
+            0% {
+                transform: translateY(-100px) translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) translateX(10px);
+                opacity: 0;
+            }
+        }
+
+        .confetti-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            display: none;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0.8;
+            animation: confettiFall linear infinite;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
         .enter-overlay {
             position: fixed;
             top: 0;
@@ -978,6 +1038,20 @@
             cursor: pointer;
         }
 
+        .upload-area {
+            border: 2px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .upload-area:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
         .upload-area.dragover {
             border-color: #43b581;
             background: rgba(67, 181, 129, 0.1);
@@ -1156,23 +1230,55 @@
             display: block;
         }
 
+        .conversion-status.processing {
+            background: rgba(255, 165, 0, 0.1);
+            border: 1px solid rgba(255, 165, 0, 0.3);
+            color: #ffa500;
+            display: block;
+        }
+
+        .admin-access {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 100;
+        }
+
+        .admin-access:hover {
+            background: rgba(30, 30, 30, 0.9);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: scale(1.1);
+        }
+
+        .admin-access svg {
+            width: 20px;
+            height: 20px;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+
+        .admin-access:hover svg {
+            opacity: 1;
+        }
+
         @media (max-width: 768px) {
-            .volume-control {
-                top: 20px;
-                right: 20px;
-                padding: 12px 16px;
-            }
-            
-            .volume-control.expanded .volume-slider {
-                width: 70px;
-            }
-
             .content {
-                padding: 80px 20px 40px;
+                padding: 40px 20px;
             }
 
-            .username {
-                font-size: 28px;
+            .profile-card {
+                max-width: 100%;
             }
 
             .avatar {
@@ -1180,677 +1286,760 @@
                 height: 120px;
             }
 
-            .enter-logo {
-                font-size: 36px;
+            .username {
+                font-size: 28px;
             }
 
-            .login-container {
-                padding: 40px 30px;
+            .social-links {
+                gap: 12px;
             }
 
-            .setting-card {
-                padding: 25px 20px;
+            .social-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .social-icon img {
+                width: 20px;
+                height: 20px;
+            }
+
+            .info-card {
+                padding: 18px;
+            }
+
+            .card-content {
+                gap: 12px;
+            }
+
+            .card-image {
+                width: 48px;
+                height: 48px;
+            }
+
+            .volume-control {
+                top: 20px;
+                right: 20px;
+                padding: 12px 16px;
+            }
+
+            .volume-control.expanded .volume-slider {
+                width: 70px;
+            }
+
+            .admin-access {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .admin-access svg {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content {
+                padding: 30px 15px;
+            }
+
+            .avatar {
+                width: 100px;
+                height: 100px;
+            }
+
+            .username {
+                font-size: 24px;
+            }
+
+            .title {
+                font-size: 12px;
+            }
+
+            .social-links {
+                gap: 10px;
+            }
+
+            .social-icon {
+                width: 36px;
+                height: 36px;
+            }
+
+            .social-icon img {
+                width: 18px;
+                height: 18px;
+            }
+
+            .info-card {
+                padding: 15px;
+            }
+
+            .card-content {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+
+            .card-image {
+                width: 100%;
+                height: 120px;
+            }
+
+            .volume-control {
+                top: 15px;
+                right: 15px;
+                padding: 10px 14px;
+            }
+
+            .volume-control.expanded .volume-slider {
+                width: 60px;
+            }
+
+            .admin-access {
+                bottom: 15px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+            }
+
+            .admin-access svg {
+                width: 16px;
+                height: 16px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="background" id="backgroundContainer"></div>
-    <div class="snow" id="snow"></div>
+    <!-- Giriş Ekranı -->
+    <div class="enter-overlay" id="enterOverlay">
+        <div class="enter-logo">dengehh</div>
+        <button class="enter-button" id="enterButton">
+            <span>Giriş Yap</span>
+        </button>
+    </div>
+
+    <!-- Arkaplan -->
+    <div class="background" id="background">
+        <img id="backgroundImage" src="" alt="">
+        <video id="backgroundVideo" loop muted></video>
+    </div>
+
+    <!-- Efektler -->
+    <div class="snow" id="snowEffect"></div>
     <div class="matrix-effect" id="matrixEffect">
         <canvas id="matrixCanvas"></canvas>
     </div>
     <div class="stars-effect" id="starsEffect"></div>
     <div class="particles-effect" id="particlesEffect"></div>
     <div class="bubbles-effect" id="bubblesEffect"></div>
+    <div class="rain-effect" id="rainEffect"></div>
+    <div class="confetti-effect" id="confettiEffect"></div>
 
-    <div class="enter-overlay" id="enterOverlay">
-        <div class="enter-logo" id="enterLogoText">dengehh</div>
-        <button class="enter-button" onclick="enter()">
-            <span>enter</span>
-        </button>
-    </div>
-
+    <!-- Ses Kontrolü -->
     <div class="volume-control" id="volumeControl">
         <div class="volume-icon" id="volumeIcon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+            <svg viewBox="0 0 24 24">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path>
             </svg>
         </div>
-        <input type="range" class="volume-slider" min="0" max="100" value="25" id="volumeSlider">
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="50">
     </div>
 
+    <!-- Ana İçerik -->
     <div class="main-container" id="mainContainer">
         <div class="content">
             <div class="profile-card">
                 <div class="avatar-container">
-                    <div class="avatar" id="profileAvatar"></div>
+                    <div class="avatar" id="avatar"></div>
                 </div>
-
-                <h1 class="username" id="profileUsername">dengehh</h1>
-                <p class="title" id="profileTitle">Lord</p>
-
+                <h1 class="username" id="username">dengehh</h1>
+                <div class="title" id="title">Geliştirici & Tasarımcı</div>
                 <div class="status-container">
-                    <div class="status-indicator" id="statusIndicator"></div>
-                    <span class="status-text" id="statusText">sleeping zzz</span>
+                    <div class="status-indicator"></div>
+                    <div class="status-text" id="statusText">Çevrimiçi</div>
                 </div>
-
-                <div class="social-links">
-                    <div class="social-icon" onclick="openLink('spotify')" id="spotifyIcon">
-                        <img src="https://cdn.discordapp.com/attachments/1060918037492027402/1434824860609019987/images__1_-removebg-preview.png?ex=6909bc48&is=69086ac8&hm=0a1392521ba092acfb92209b3835f64ff3b7230fc9f2a0f76e6433b67cdea29e&" alt="Spotify">
-                    </div>
-                    <div class="social-icon" onclick="openLink('github')" id="githubIcon">
-                        <img src="https://cdn.discordapp.com/attachments/1060918037492027402/1434824860290388008/images__3_-removebg-preview.png?ex=6909bc48&is=69086ac8&hm=b125fafb254383815e4553294be1e6a290d9b226da5836e949bda4095a51c46a&" alt="GitHub">
-                    </div>
-                    <div class="social-icon" onclick="openLink('youtube')" id="youtubeIcon">
-                        <img src="https://cdn.discordapp.com/attachments/1060918037492027402/1434824861229912135/images__2_-removebg-preview.png?ex=6909bc48&is=69086ac8&hm=ee42f1022c800172489b49df0c59531bbd368f8ae27618e9fb3169e110a85a2d&" alt="YouTube">
-                    </div>
-                    <div class="social-icon" onclick="openLink('discord')" id="discordIcon">
-                        <img src="https://cdn.discordapp.com/attachments/1060918037492027402/1434824860953219072/images-removebg-preview.png?ex=6909bc48&is=69086ac8&hm=ac1bbc88c8e4d9350dbc4d0ee9ee03cbaa8bf8f272b84cd450c2aa1927cc0aec&" alt="Discord">
-                    </div>
-                </div>
-
-                <div class="info-card" onclick="openLink('spotify')">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <img src="https://cdn.discordapp.com/attachments/1060918037492027402/1434824860609019987/images__1_-removebg-preview.png?ex=6909bc48&is=69086ac8&hm=0a1392521ba092acfb92209b3835f64ff3b7230fc9f2a0f76e6433b67cdea29e&" alt="Spotify">
-                        </div>
-                        <span class="card-title">Favorite Music</span>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-image">
-                            <img src="" alt="Album" id="musicCoverImage">
-                        </div>
-                        <div class="card-info">
-                            <div class="card-primary" id="musicTitle">My Spotify Playlist</div>
-                            <div class="card-secondary">click to listen</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="info-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <img src="https://cdn.discordapp.com/attachments/1060918037492027402/1434824860953219072/images-removebg-preview.png?ex=6909bc48&is=69086ac8&hm=ac1bbc88c8e4d9350dbc4d0ee9ee03cbaa8bf8f272b84cd450c2aa1927cc0aec&" alt="Discord">
-                        </div>
-                        <span class="card-title">Discord</span>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-image">
-                            <img id="discordAvatar" src="https://cdn.discordapp.com/avatars/1040502104348954694/b5cf99b73082f118e1bfa396e5d547cc.png?size=1024" alt="Avatar">
-                        </div>
-                        <div class="card-info">
-                            <div class="card-primary" id="discordUsername">dengehh ⭐ STAR</div>
-                            <div class="card-secondary" id="discordStatus">last seen 1h ago</div>
-                        </div>
-                    </div>
-                </div>
+                <div class="social-links" id="socialLinks"></div>
+                <div class="info-cards" id="infoCards"></div>
             </div>
         </div>
     </div>
 
+    <!-- Admin Erişim Butonu -->
+    <div class="admin-access" id="adminAccess">
+        <svg viewBox="0 0 24 24">
+            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"></path>
+        </svg>
+    </div>
+
+    <!-- Admin Paneli -->
     <div class="admin-panel" id="adminPanel">
         <div class="login-container" id="loginContainer">
-            <h2>Admin Panel</h2>
-            <form onsubmit="login(event)">
-                <div class="input-group">
-                    <label>Password</label>
-                    <input type="password" id="passwordInput" placeholder="Enter password" required>
-                </div>
-                <button type="submit" class="login-btn">Login</button>
-                <div class="error-message" id="errorMessage">Incorrect password!</div>
-            </form>
+            <h2>Admin Girişi</h2>
+            <div class="input-group">
+                <label for="adminUsername">Kullanıcı Adı</label>
+                <input type="text" id="adminUsername" placeholder="Kullanıcı adınızı girin">
+            </div>
+            <div class="input-group">
+                <label for="adminPassword">Şifre</label>
+                <input type="password" id="adminPassword" placeholder="Şifrenizi girin">
+            </div>
+            <button class="login-btn" id="loginBtn">Giriş Yap</button>
+            <div class="error-message" id="errorMessage">Hatalı kullanıcı adı veya şifre!</div>
         </div>
-
         <div class="panel-container" id="panelContainer">
             <div class="panel-header">
-                <h1>Control Panel</h1>
-                <button class="logout-btn" onclick="logout()">Logout</button>
+                <h1>Admin Paneli</h1>
+                <button class="logout-btn" id="logoutBtn">Çıkış Yap</button>
             </div>
-
             <div class="settings-grid">
                 <div class="setting-card">
-                    <h3>Profile Settings</h3>
-                    
+                    <h3>Profil Ayarları</h3>
                     <div class="form-group">
-                        <label>Profile Picture</label>
-                        <div class="upload-area" onclick="document.getElementById('avatarFileInput').click()" id="avatarUploadArea">
-                            <div class="upload-icon">📸</div>
-                            <div class="upload-text">Click or Drag & Drop</div>
-                            <div class="upload-text-small">PNG, JPG, GIF (Max 5MB)</div>
-                        </div>
-                        <input type="file" id="avatarFileInput" class="file-input" accept="image/*" onchange="handleFileUpload(this, 'avatar')">
-                        <div class="uploaded-preview" id="avatarPreview">
-                            <img id="avatarPreviewImg" src="" alt="Preview">
-                            <div class="uploaded-info">
-                                <div class="uploaded-name" id="avatarFileName"></div>
-                                <div class="uploaded-size" id="avatarFileSize"></div>
-                            </div>
-                            <button class="remove-upload" onclick="removeUpload('avatar')">Remove</button>
-                        </div>
+                        <label for="profileUsername">Kullanıcı Adı</label>
+                        <input type="text" id="profileUsername" value="dengehh">
                     </div>
-
                     <div class="form-group">
-                        <label>Or Use URL</label>
-                        <input type="url" id="avatarUrl" placeholder="https://example.com/avatar.png">
+                        <label for="profileTitle">Başlık</label>
+                        <input type="text" id="profileTitle" value="Geliştirici & Tasarımcı">
                     </div>
-
                     <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" id="usernameInput" placeholder="dengehh">
+                        <label for="profileStatus">Durum</label>
+                        <input type="text" id="profileStatus" value="Çevrimiçi">
                     </div>
-
                     <div class="form-group">
-                        <label>Username Effects</label>
-                        <div style="display: grid; gap: 15px;">
-                            <label class="toggle-label">
-                                <span style="color: rgba(255,255,255,0.6); font-size: 12px;">Glowing Effect</span>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="nameGlowing">
-                                    <span class="toggle-slider"></span>
-                                </label>
-                            </label>
-                            <label class="toggle-label">
-                                <span style="color: rgba(255,255,255,0.6); font-size: 12px;">Gradient Effect</span>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="nameGradient">
-                                    <span class="toggle-slider"></span>
-                                </label>
-                            </label>
-                            <label class="toggle-label">
-                                <span style="color: rgba(255,255,255,0.6); font-size: 12px;">Rainbow Effect</span>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="nameRainbow">
-                                    <span class="toggle-slider"></span>
-                                </label>
-                            </label>
-                        </div>
+                        <label for="usernameStyle">Kullanıcı Adı Stili</label>
+                        <select id="usernameStyle">
+                            <option value="normal">Normal</option>
+                            <option value="glowing">Glow Efekti</option>
+                            <option value="gradient">Gradient</option>
+                            <option value="rainbow">Rainbow</option>
+                        </select>
                     </div>
-
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" id="titleInput" placeholder="Lord">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Status Text</label>
-                        <input type="text" id="statusTextInput" placeholder="sleeping zzz">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Status Color</label>
-                        <div class="color-picker-wrapper">
-                            <input type="color" id="statusColor" value="#43b581">
-                            <span style="color: rgba(255,255,255,0.5); font-size: 12px;">Online: #43b581, Idle: #faa61a, DND: #f04747</span>
-                        </div>
-                    </div>
-
-                    <button class="save-btn" onclick="saveProfileSettings()">Save Profile</button>
                 </div>
 
                 <div class="setting-card">
-                    <h3>Background Settings</h3>
-                    
+                    <h3>Arkaplan Ayarları</h3>
                     <div class="form-group">
-                        <label>Background Media</label>
-                        <div class="upload-area" onclick="document.getElementById('backgroundFileInput').click()" id="backgroundUploadArea">
-                            <div class="upload-icon">🎬</div>
-                            <div class="upload-text">Click or Drag & Drop</div>
-                            <div class="upload-text-small">PNG, JPG, GIF, MP4, WEBM (Max 20MB)</div>
+                        <label for="backgroundType">Arkaplan Türü</label>
+                        <select id="backgroundType">
+                            <option value="image">Resim</option>
+                            <option value="video">Video</option>
+                            <option value="color">Renk</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="backgroundImageGroup">
+                        <label for="backgroundImageUrl">Arkaplan Resim URL</label>
+                        <input type="text" id="backgroundImageUrl" placeholder="Resim URL'si girin">
+                    </div>
+                    <div class="form-group" id="backgroundVideoGroup" style="display: none;">
+                        <label for="backgroundVideoUrl">Arkaplan Video URL</label>
+                        <input type="text" id="backgroundVideoUrl" placeholder="Video URL'si girin">
+                    </div>
+                    <div class="form-group" id="backgroundColorGroup" style="display: none;">
+                        <label for="backgroundColor">Arkaplan Rengi</label>
+                        <div class="color-picker-wrapper">
+                            <input type="color" id="backgroundColor" value="#000000">
+                            <input type="text" id="backgroundColorText" value="#000000" readonly>
                         </div>
-                        <input type="file" id="backgroundFileInput" class="file-input" accept="image/*,video/*" onchange="handleFileUpload(this, 'background')">
+                    </div>
+                    <div class="form-group">
+                        <label>Arkaplan Yükle</label>
+                        <div class="upload-area" id="backgroundUploadArea">
+                            <div class="upload-icon">📁</div>
+                            <div class="upload-text">Dosya yüklemek için tıklayın veya sürükleyin</div>
+                            <div class="upload-text-small">PNG, JPG, GIF, MP4 (Max 10MB)</div>
+                            <input type="file" class="file-input" id="backgroundFileInput" accept="image/*,video/*">
+                        </div>
                         <div class="uploaded-preview" id="backgroundPreview">
-                            <div id="backgroundPreviewMedia"></div>
                             <div class="uploaded-info">
                                 <div class="uploaded-name" id="backgroundFileName"></div>
                                 <div class="uploaded-size" id="backgroundFileSize"></div>
                             </div>
-                            <button class="remove-upload" onclick="removeUpload('background')">Remove</button>
+                            <button class="remove-upload" id="removeBackgroundUpload">Kaldır</button>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label>Or Use URL</label>
-                        <input type="url" id="backgroundUrl" placeholder="https://example.com/background.gif">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Background Opacity (0-100)</label>
-                        <input type="number" id="backgroundOpacity" min="0" max="100" value="15" placeholder="15">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Visual Effects</label>
-                        <div style="display: grid; gap: 15px;">
-                            <label class="toggle-label">
-                                <span style="color: rgba(255,255,255,0.6); font-size: 12px;">Snow Effect</span>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="snowEffect" checked>
-                                    <span class="toggle-slider"></span>
-                                </label>
-                            </label>
-                            <label class="toggle-label">
-                                <span style="color: rgba(255,255,255,0.6); font-size: 12px;">Matrix Effect</span>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="matrixEffectToggle">
-                                    <span class="toggle-slider"></span>
-                                </label>
-                            </label>
-                            <label class="toggle-label">
-                                <span style="color: rgba(255,255,255,0.6); font-size: 12px;">Stars Effect</span>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="starsEffectToggle">
-                                    <span class="toggle-slider"></span>
-                                </label>
-                            </label>
-                            <label class="toggle-label">
-                                <span style="color: rgba(255,255,255,0.6); font-size: 12px;">Particles Effect</span>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="particlesEffectToggle">
-                                    <span class="toggle-slider"></span>
-                                </label>
-                            </label>
-                            <label class="toggle-label">
-                                <span style="color: rgba(255,255,255,0.6); font-size: 12px;">Bubbles Effect</span>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="bubblesEffectToggle">
-                                    <span class="toggle-slider"></span>
-                                </label>
-                            </label>
-                        </div>
-                    </div>
-
-                    <button class="save-btn" onclick="saveBackgroundSettings()">Save Background</button>
                 </div>
 
                 <div class="setting-card">
-                    <h3>Music Settings</h3>
-                    
+                    <h3>Efekt Ayarları</h3>
                     <div class="form-group">
-                        <label>Background Music</label>
-                        <div class="upload-area" onclick="document.getElementById('musicFileInput').click()" id="musicUploadArea">
-                            <div class="upload-icon">🎵</div>
-                            <div class="upload-text">Click or Drag & Drop</div>
-                            <div class="upload-text-small">MP3, WAV, OGG (Max 10MB)</div>
-                        </div>
-                        <input type="file" id="musicFileInput" class="file-input" accept="audio/*" onchange="handleFileUpload(this, 'music')">
-                        <div class="uploaded-preview" id="musicPreview">
-                            <div style="width: 80px; height: 80px; background: rgba(67,181,129,0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 30px;">🎵</div>
-                            <div class="uploaded-info">
-                                <div class="uploaded-name" id="musicFileName"></div>
-                                <div class="uploaded-size" id="musicFileSize"></div>
-                            </div>
-                            <button class="remove-upload" onclick="removeUpload('music')">Remove</button>
-                        </div>
+                        <label class="toggle-label">
+                            <span>Kar Efekti</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="snowEffectToggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </label>
                     </div>
-
                     <div class="form-group">
-                        <label>Or Use URL</label>
-                        <input type="url" id="musicUrl" placeholder="https://example.com/music.mp3">
+                        <label class="toggle-label">
+                            <span>Matrix Efekti</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="matrixEffectToggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </label>
                     </div>
-
                     <div class="form-group">
-                        <label>Music Website URL (Auto Convert)</label>
-                        <input type="url" id="musicWebsiteUrl" placeholder="https://youtube.com/watch?v=... or Spotify link">
-                        <button class="convert-btn" id="convertMusicBtn" onclick="convertMusicUrl()">Convert to MP3</button>
-                        <div class="conversion-status" id="conversionStatus"></div>
+                        <label class="toggle-label">
+                            <span>Yıldız Efekti</span>
+                            <label class="toggle-label">
+                                <input type="checkbox" id="starsEffectToggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </label>
                     </div>
-
                     <div class="form-group">
-                        <label>Music Volume (0-100)</label>
-                        <input type="number" id="musicVolume" min="0" max="100" value="25" placeholder="25">
+                        <label class="toggle-label">
+                            <span>Partikül Efekti</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="particlesEffectToggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </label>
                     </div>
-
                     <div class="form-group">
-                        <label>Music Card Title</label>
-                        <input type="text" id="musicCardTitle" placeholder="My Spotify Playlist">
+                        <label class="toggle-label">
+                            <span>Baloncuk Efekti</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="bubblesEffectToggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </label>
                     </div>
-
                     <div class="form-group">
-                        <label>Music Card Cover (Album Art)</label>
-                        <div class="upload-area" onclick="document.getElementById('musicCoverFileInput').click()" id="musicCoverUploadArea">
-                            <div class="upload-icon">🎨</div>
-                            <div class="upload-text">Click or Drag & Drop</div>
-                            <div class="upload-text-small">PNG, JPG (Max 5MB)</div>
-                        </div>
-                        <input type="file" id="musicCoverFileInput" class="file-input" accept="image/*" onchange="handleFileUpload(this, 'musicCover')">
-                        <div class="uploaded-preview" id="musicCoverPreview">
-                            <img id="musicCoverPreviewImg" src="" alt="Preview">
-                            <div class="uploaded-info">
-                                <div class="uploaded-name" id="musicCoverFileName"></div>
-                                <div class="uploaded-size" id="musicCoverFileSize"></div>
-                            </div>
-                            <button class="remove-upload" onclick="removeUpload('musicCover')">Remove</button>
-                        </div>
+                        <label class="toggle-label">
+                            <span>Yağmur Efekti</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="rainEffectToggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </label>
                     </div>
-
                     <div class="form-group">
-                        <label>Or Use Cover URL</label>
-                        <input type="url" id="musicCoverUrl" placeholder="https://example.com/cover.jpg">
+                        <label class="toggle-label">
+                            <span>Konfeti Efekti</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="confettiEffectToggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </label>
                     </div>
-
-                    <button class="save-btn" onclick="saveMusicSettings()">Save Music</button>
                 </div>
 
                 <div class="setting-card">
-                    <h3>Social Links</h3>
+                    <h3>Sosyal Medya Bağlantıları</h3>
                     <div class="form-group">
-                        <label>Spotify Link</label>
-                        <input type="url" id="spotifyLink" placeholder="https://spotify.link/...">
+                        <label for="socialInstagram">Instagram</label>
+                        <input type="text" id="socialInstagram" placeholder="Instagram URL">
                     </div>
                     <div class="form-group">
-                        <label>Discord Link</label>
-                        <input type="url" id="discordLink" placeholder="https://discord.gg/...">
+                        <label for="socialTwitter">Twitter</label>
+                        <input type="text" id="socialTwitter" placeholder="Twitter URL">
                     </div>
                     <div class="form-group">
-                        <label>YouTube Link</label>
-                        <input type="url" id="youtubeLink" placeholder="https://youtube.com/...">
+                        <label for="socialGithub">GitHub</label>
+                        <input type="text" id="socialGithub" placeholder="GitHub URL">
                     </div>
                     <div class="form-group">
-                        <label>GitHub Link</label>
-                        <input type="url" id="githubLink" placeholder="https://github.com/...">
+                        <label for="socialDiscord">Discord</label>
+                        <input type="text" id="socialDiscord" placeholder="Discord URL">
                     </div>
-                    <button class="save-btn" onclick="saveSocialLinks()">Save Social Links</button>
+                    <div class="form-group">
+                        <label for="socialSpotify">Spotify</label>
+                        <input type="text" id="socialSpotify" placeholder="Spotify URL">
+                    </div>
                 </div>
 
                 <div class="setting-card">
-                    <h3>Discord Card Settings</h3>
-                    
+                    <h3>YouTube MP3 Dönüştürücü</h3>
                     <div class="form-group">
-                        <label>Discord Avatar</label>
-                        <div class="upload-area" onclick="document.getElementById('discordAvatarFileInput').click()" id="discordAvatarUploadArea">
-                            <div class="upload-icon">👤</div>
-                            <div class="upload-text">Click or Drag & Drop</div>
-                            <div class="upload-text-small">PNG, JPG, GIF (Max 5MB)</div>
-                        </div>
-                        <input type="file" id="discordAvatarFileInput" class="file-input" accept="image/*" onchange="handleFileUpload(this, 'discordAvatar')">
-                        <div class="uploaded-preview" id="discordAvatarPreview">
-                            <img id="discordAvatarPreviewImg" src="" alt="Preview">
-                            <div class="uploaded-info">
-                                <div class="uploaded-name" id="discordAvatarFileName"></div>
-                                <div class="uploaded-size" id="discordAvatarFileSize"></div>
-                            </div>
-                            <button class="remove-upload" onclick="removeUpload('discordAvatar')">Remove</button>
-                        </div>
+                        <label for="youtubeUrl">YouTube URL</label>
+                        <input type="text" id="youtubeUrl" placeholder="YouTube video URL'sini girin">
                     </div>
-
-                    <div class="form-group">
-                        <label>Or Use URL</label>
-                        <input type="url" id="discordAvatarUrl" placeholder="https://cdn.discordapp.com/avatars/...">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Discord Username</label>
-                        <input type="text" id="discordUsernameInput" placeholder="dengehh ⭐ STAR">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Discord Status</label>
-                        <input type="text" id="discordStatusInput" placeholder="last seen 1h ago">
-                    </div>
-
-                    <button class="save-btn" onclick="saveDiscordSettings()">Save Discord Card</button>
+                    <button class="convert-btn" id="convertBtn" disabled>MP3'e Dönüştür</button>
+                    <div class="conversion-status" id="conversionStatus"></div>
                 </div>
 
                 <div class="setting-card">
-                    <h3>Enter Screen Settings</h3>
+                    <h3>Bilgi Kartları</h3>
                     <div class="form-group">
-                        <label>Enter Screen Logo Text</label>
-                        <input type="text" id="enterLogoInput" placeholder="dengehh">
+                        <label for="infoCard1Title">Kart 1 Başlık</label>
+                        <input type="text" id="infoCard1Title" value="Hakkımda">
                     </div>
-                    <button class="save-btn" onclick="saveEnterSettings()">Save Enter Screen</button>
+                    <div class="form-group">
+                        <label for="infoCard1Content">Kart 1 İçerik</label>
+                        <textarea id="infoCard1Content">Merhaba! Ben dengehh, web geliştirici ve tasarımcıyım. Yaratıcı projeler üzerinde çalışmayı seviyorum.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="infoCard2Title">Kart 2 Başlık</label>
+                        <input type="text" id="infoCard2Title" value="Projelerim">
+                    </div>
+                    <div class="form-group">
+                        <label for="infoCard2Content">Kart 2 İçerik</label>
+                        <textarea id="infoCard2Content">Çeşitli web uygulamaları, mobil uygulamalar ve tasarım projeleri üzerinde çalışıyorum.</textarea>
+                    </div>
                 </div>
 
-                <div class="setting-card">
-                    <h3>Advanced Settings</h3>
-                    <div class="form-group">
-                        <label>Page Favicon URL</label>
-                        <input type="url" id="faviconUrl" placeholder="https://example.com/favicon.ico">
-                    </div>
-                    <div class="form-group">
-                        <label>Page Title</label>
-                        <input type="text" id="pageTitle" placeholder="dengehh">
-                    </div>
-                    <div class="form-group">
-                        <label>Avatar Border Color</label>
-                        <div class="color-picker-wrapper">
-                            <input type="color" id="avatarBorderColor" value="#ffffff">
-                            <span style="color: rgba(255,255,255,0.5); font-size: 12px;">Avatar border ring color</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Animation Speed</label>
-                        <select id="animationSpeed">
-                            <option value="slow">Slow</option>
-                            <option value="normal" selected>Normal</option>
-                            <option value="fast">Fast</option>
-                        </select>
-                    </div>
-                    <button class="save-btn" onclick="saveAdvancedSettings()">Save Advanced</button>
-                </div>
+                <button class="save-btn" id="saveSettingsBtn">Tüm Ayarları Kaydet</button>
             </div>
         </div>
     </div>
 
-    <audio id="bgAudio" loop>
-        <source src="" type="audio/mpeg">
-    </audio>
-
     <script>
-        const ADMIN_PASSWORD = 'EMRE123';
-        const STORAGE_KEY = 'profile_settings';
-
-        let uploadedFiles = {
-            avatar: null,
-            background: null,
-            music: null,
-            musicCover: null,
-            discordAvatar: null
-        };
-
-        let settings = {
-            profile: {
-                avatar: 'https://cdn.discordapp.com/avatars/1040502104348954694/b5cf99b73082f118e1bfa396e5d547cc.png?size=1024',
-                username: 'dengehh',
-                title: 'Lord',
-                statusText: 'sleeping zzz',
-                statusColor: '#43b581',
-                nameGlowing: false,
-                nameGradient: false,
-                nameRainbow: false
+        // Config dosyası
+        const CONFIG = {
+            admin: {
+                username: "admin",
+                password: "admin123"
             },
-            background: {
-                url: '',
-                opacity: 15,
-                snowEffect: true,
-                matrixEffect: false,
-                starsEffect: false,
-                particlesEffect: false,
-                bubblesEffect: false
-            },
-            music: {
-                url: '',
-                volume: 25,
-                cardTitle: 'My Spotify Playlist',
-                coverUrl: ''
-            },
-            social: {
-                spotify: 'https://spotify.link/eT5J65tsZXb',
-                discord: 'https://discord.gg/y2ADcagZnW',
-                youtube: '',
-                github: ''
-            },
-            discordCard: {
-                avatar: 'https://cdn.discordapp.com/avatars/1040502104348954694/b5cf99b73082f118e1bfa396e5d547cc.png?size=1024',
-                username: 'dengehh ⭐ STAR',
-                status: 'last seen 1h ago'
-            },
-            enterScreen: {
-                logoText: 'dengehh'
-            },
-            advanced: {
-                faviconUrl: '',
-                pageTitle: 'dengehh',
-                avatarBorderColor: '#ffffff',
-                animationSpeed: 'normal'
-            }
-        };
-
-        function loadSettings() {
-            const stored = localStorage.getItem(STORAGE_KEY);
-            if (stored) {
-                const loaded = JSON.parse(stored);
-                settings = { ...settings, ...loaded };
-                if (!settings.advanced) {
-                    settings.advanced = {
-                        faviconUrl: '',
-                        pageTitle: 'dengehh',
-                        avatarBorderColor: '#ffffff',
-                        animationSpeed: 'normal'
-                    };
-                }
-            }
-            applySettings();
-        }
-
-        function saveSettings() {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
-        }
-
-        function applySettings() {
-            document.getElementById('profileAvatar').style.backgroundImage = `url('${settings.profile.avatar}')`;
-            document.getElementById('profileUsername').textContent = settings.profile.username;
-            document.getElementById('profileTitle').textContent = settings.profile.title;
-            document.getElementById('statusText').textContent = settings.profile.statusText;
-            document.getElementById('statusIndicator').style.background = settings.profile.statusColor;
-            
-            if (settings.advanced && settings.advanced.avatarBorderColor) {
-                const avatar = document.getElementById('profileAvatar');
-                const style = document.createElement('style');
-                style.textContent = `
-                    .avatar::before { border-color: ${settings.advanced.avatarBorderColor}33 !important; }
-                    .avatar::after { 
-                        border-top-color: ${settings.advanced.avatarBorderColor}80 !important; 
-                        border-right-color: ${settings.advanced.avatarBorderColor}80 !important; 
+            settings: {
+                username: "dengehh",
+                title: "Geliştirici & Tasarımcı",
+                status: "Çevrimiçi",
+                usernameStyle: "normal",
+                background: {
+                    type: "image",
+                    imageUrl: "",
+                    videoUrl: "",
+                    color: "#000000"
+                },
+                effects: {
+                    snow: false,
+                    matrix: false,
+                    stars: false,
+                    particles: false,
+                    bubbles: false,
+                    rain: false,
+                    confetti: false
+                },
+                social: {
+                    instagram: "",
+                    twitter: "",
+                    github: "",
+                    discord: "",
+                    spotify: ""
+                },
+                infoCards: {
+                    card1: {
+                        title: "Hakkımda",
+                        content: "Merhaba! Ben dengehh, web geliştirici ve tasarımcıyım. Yaratıcı projeler üzerinde çalışmayı seviyorum."
+                    },
+                    card2: {
+                        title: "Projelerim",
+                        content: "Çeşitli web uygulamaları, mobil uygulamalar ve tasarım projeleri üzerinde çalışıyorum."
                     }
-                `;
-                document.head.appendChild(style);
-            }
-
-            const username = document.getElementById('profileUsername');
-            username.classList.remove('glowing', 'gradient', 'rainbow');
-            if (settings.profile.nameGlowing) {
-                username.classList.add('glowing');
-            }
-            if (settings.profile.nameGradient) {
-                username.classList.add('gradient');
-            }
-            if (settings.profile.nameRainbow) {
-                username.classList.add('rainbow');
-            }
-
-            updateBackground();
-            document.querySelector('.background').style.opacity = settings.background.opacity / 100;
-            
-            document.getElementById('snow').style.display = settings.background.snowEffect ? 'block' : 'none';
-            document.getElementById('matrixEffect').style.display = settings.background.matrixEffect ? 'block' : 'none';
-            document.getElementById('starsEffect').style.display = settings.background.starsEffect ? 'block' : 'none';
-            document.getElementById('particlesEffect').style.display = settings.background.particlesEffect ? 'block' : 'none';
-            document.getElementById('bubblesEffect').style.display = settings.background.bubblesEffect ? 'block' : 'none';
-
-            if (settings.background.matrixEffect) {
-                initMatrix();
-            }
-            if (settings.background.starsEffect) {
-                createStars();
-            }
-            if (settings.background.particlesEffect) {
-                createParticles();
-            }
-            if (settings.background.bubblesEffect) {
-                createBubbles();
-            }
-
-            if (settings.music.url) {
-                document.getElementById('bgAudio').querySelector('source').src = settings.music.url;
-                document.getElementById('bgAudio').load();
-            }
-            document.getElementById('bgAudio').volume = settings.music.volume / 100;
-            document.getElementById('volumeSlider').value = settings.music.volume;
-            document.getElementById('musicTitle').textContent = settings.music.cardTitle;
-            
-            if (settings.music.coverUrl) {
-                document.getElementById('musicCoverImage').src = settings.music.coverUrl;
-            }
-
-            document.getElementById('discordAvatar').src = settings.discordCard.avatar;
-            document.getElementById('discordUsername').textContent = settings.discordCard.username;
-            document.getElementById('discordStatus').textContent = settings.discordCard.status;
-
-            document.getElementById('enterLogoText').textContent = settings.enterScreen.logoText;
-            
-            if (settings.advanced) {
-                if (settings.advanced.pageTitle) {
-                    document.title = settings.advanced.pageTitle;
-                }
-                if (settings.advanced.faviconUrl) {
-                    let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
-                    link.type = 'image/x-icon';
-                    link.rel = 'shortcut icon';
-                    link.href = settings.advanced.faviconUrl;
-                    document.getElementsByTagName('head')[0].appendChild(link);
                 }
             }
-        }
+        };
 
-        function updateBackground() {
-            const container = document.getElementById('backgroundContainer');
-            container.innerHTML = '';
-            
-            if (settings.background.url) {
-                const ext = settings.background.url.split('.').pop().toLowerCase().split('?')[0];
+        // DOM Elementleri
+        const elements = {
+            enterOverlay: document.getElementById('enterOverlay'),
+            enterButton: document.getElementById('enterButton'),
+            mainContainer: document.getElementById('mainContainer'),
+            background: document.getElementById('background'),
+            backgroundImage: document.getElementById('backgroundImage'),
+            backgroundVideo: document.getElementById('backgroundVideo'),
+            volumeControl: document.getElementById('volumeControl'),
+            volumeIcon: document.getElementById('volumeIcon'),
+            volumeSlider: document.getElementById('volumeSlider'),
+            avatar: document.getElementById('avatar'),
+            username: document.getElementById('username'),
+            title: document.getElementById('title'),
+            statusText: document.getElementById('statusText'),
+            socialLinks: document.getElementById('socialLinks'),
+            infoCards: document.getElementById('infoCards'),
+            adminAccess: document.getElementById('adminAccess'),
+            adminPanel: document.getElementById('adminPanel'),
+            loginContainer: document.getElementById('loginContainer'),
+            panelContainer: document.getElementById('panelContainer'),
+            adminUsername: document.getElementById('adminUsername'),
+            adminPassword: document.getElementById('adminPassword'),
+            loginBtn: document.getElementById('loginBtn'),
+            errorMessage: document.getElementById('errorMessage'),
+            logoutBtn: document.getElementById('logoutBtn'),
+            profileUsername: document.getElementById('profileUsername'),
+            profileTitle: document.getElementById('profileTitle'),
+            profileStatus: document.getElementById('profileStatus'),
+            usernameStyle: document.getElementById('usernameStyle'),
+            backgroundType: document.getElementById('backgroundType'),
+            backgroundImageUrl: document.getElementById('backgroundImageUrl'),
+            backgroundVideoUrl: document.getElementById('backgroundVideoUrl'),
+            backgroundColor: document.getElementById('backgroundColor'),
+            backgroundColorText: document.getElementById('backgroundColorText'),
+            backgroundUploadArea: document.getElementById('backgroundUploadArea'),
+            backgroundFileInput: document.getElementById('backgroundFileInput'),
+            backgroundPreview: document.getElementById('backgroundPreview'),
+            backgroundFileName: document.getElementById('backgroundFileName'),
+            backgroundFileSize: document.getElementById('backgroundFileSize'),
+            removeBackgroundUpload: document.getElementById('removeBackgroundUpload'),
+            snowEffectToggle: document.getElementById('snowEffectToggle'),
+            matrixEffectToggle: document.getElementById('matrixEffectToggle'),
+            starsEffectToggle: document.getElementById('starsEffectToggle'),
+            particlesEffectToggle: document.getElementById('particlesEffectToggle'),
+            bubblesEffectToggle: document.getElementById('bubblesEffectToggle'),
+            rainEffectToggle: document.getElementById('rainEffectToggle'),
+            confettiEffectToggle: document.getElementById('confettiEffectToggle'),
+            socialInstagram: document.getElementById('socialInstagram'),
+            socialTwitter: document.getElementById('socialTwitter'),
+            socialGithub: document.getElementById('socialGithub'),
+            socialDiscord: document.getElementById('socialDiscord'),
+            socialSpotify: document.getElementById('socialSpotify'),
+            youtubeUrl: document.getElementById('youtubeUrl'),
+            convertBtn: document.getElementById('convertBtn'),
+            conversionStatus: document.getElementById('conversionStatus'),
+            infoCard1Title: document.getElementById('infoCard1Title'),
+            infoCard1Content: document.getElementById('infoCard1Content'),
+            infoCard2Title: document.getElementById('infoCard2Title'),
+            infoCard2Content: document.getElementById('infoCard2Content'),
+            saveSettingsBtn: document.getElementById('saveSettingsBtn')
+        };
+
+        // Efekt elementleri
+        const effectElements = {
+            snow: document.getElementById('snowEffect'),
+            matrix: document.getElementById('matrixEffect'),
+            stars: document.getElementById('starsEffect'),
+            particles: document.getElementById('particlesEffect'),
+            bubbles: document.getElementById('bubblesEffect'),
+            rain: document.getElementById('rainEffect'),
+            confetti: document.getElementById('confettiEffect')
+        };
+
+        // Uygulama durumu
+        let appState = {
+            isAdmin: false,
+            settings: JSON.parse(JSON.stringify(CONFIG.settings)),
+            audioContext: null,
+            backgroundMusic: null,
+            isPlaying: false,
+            currentVolume: 0.5
+        };
+
+        // Sayfa yüklendiğinde
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+            setupEventListeners();
+            loadSettings();
+        });
+
+        // Uygulamayı başlat
+        function initializeApp() {
+            // Giriş butonu tıklama
+            elements.enterButton.addEventListener('click', function() {
+                elements.enterOverlay.classList.add('hidden');
+                setTimeout(() => {
+                    elements.mainContainer.classList.add('visible');
+                    initializeEffects();
+                    updateUI();
+                }, 1000);
+            });
+
+            // Ses kontrolü
+            elements.volumeControl.addEventListener('click', function(e) {
+                if (!elements.volumeControl.classList.contains('expanded')) {
+                    elements.volumeControl.classList.add('expanded');
+                    e.stopPropagation();
+                }
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!elements.volumeControl.contains(e.target)) {
+                    elements.volumeControl.classList.remove('expanded');
+                }
+            });
+
+            elements.volumeSlider.addEventListener('input', function() {
+                const volume = this.value / 100;
+                appState.currentVolume = volume;
+                if (appState.backgroundMusic) {
+                    appState.backgroundMusic.volume = volume;
+                }
+                updateVolumeIcon(volume);
+            });
+
+            // Admin paneli
+            elements.adminAccess.addEventListener('click', function() {
+                elements.adminPanel.classList.add('active');
+            });
+
+            elements.loginBtn.addEventListener('click', function() {
+                const username = elements.adminUsername.value;
+                const password = elements.adminPassword.value;
                 
-                if (ext === 'mp4' || ext === 'webm') {
-                    const video = document.createElement('video');
-                    video.src = settings.background.url;
-                    video.autoplay = true;
-                    video.loop = true;
-                    video.muted = true;
-                    video.playsInline = true;
-                    container.appendChild(video);
+                if (username === CONFIG.admin.username && password === CONFIG.admin.password) {
+                    appState.isAdmin = true;
+                    elements.loginContainer.style.display = 'none';
+                    elements.panelContainer.classList.add('active');
+                    loadAdminSettings();
                 } else {
-                    const img = document.createElement('img');
-                    img.src = settings.background.url;
-                    container.appendChild(img);
+                    elements.errorMessage.style.display = 'block';
                 }
+            });
+
+            elements.logoutBtn.addEventListener('click', function() {
+                appState.isAdmin = false;
+                elements.adminPanel.classList.remove('active');
+                elements.loginContainer.style.display = 'block';
+                elements.panelContainer.classList.remove('active');
+                elements.errorMessage.style.display = 'none';
+            });
+
+            // Arkaplan türü değişikliği
+            elements.backgroundType.addEventListener('change', function() {
+                const type = this.value;
+                elements.backgroundImageGroup.style.display = type === 'image' ? 'block' : 'none';
+                elements.backgroundVideoGroup.style.display = type === 'video' ? 'block' : 'none';
+                elements.backgroundColorGroup.style.display = type === 'color' ? 'block' : 'none';
+            });
+
+            // Arkaplan rengi değişikliği
+            elements.backgroundColor.addEventListener('input', function() {
+                elements.backgroundColorText.value = this.value;
+            });
+
+            // Dosya yükleme
+            elements.backgroundUploadArea.addEventListener('click', function() {
+                elements.backgroundFileInput.click();
+            });
+
+            elements.backgroundUploadArea.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.classList.add('dragover');
+            });
+
+            elements.backgroundUploadArea.addEventListener('dragleave', function() {
+                this.classList.remove('dragover');
+            });
+
+            elements.backgroundUploadArea.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('dragover');
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    handleBackgroundFile(files[0]);
+                }
+            });
+
+            elements.backgroundFileInput.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    handleBackgroundFile(this.files[0]);
+                }
+            });
+
+            elements.removeBackgroundUpload.addEventListener('click', function() {
+                elements.backgroundPreview.classList.remove('show');
+                elements.backgroundFileInput.value = '';
+            });
+
+            // YouTube dönüştürücü
+            elements.youtubeUrl.addEventListener('input', function() {
+                elements.convertBtn.disabled = !this.value.trim();
+            });
+
+            elements.convertBtn.addEventListener('click', function() {
+                convertYouTubeToMp3();
+            });
+
+            // Ayarları kaydet
+            elements.saveSettingsBtn.addEventListener('click', function() {
+                saveSettings();
+            });
+        }
+
+        // Event listener'ları kur
+        function setupEventListeners() {
+            // Sayfa dışına tıklama
+            document.addEventListener('click', function(e) {
+                if (!elements.adminPanel.contains(e.target) && !elements.adminAccess.contains(e.target)) {
+                    elements.adminPanel.classList.remove('active');
+                }
+            });
+        }
+
+        // Efektleri başlat
+        function initializeEffects() {
+            // Kar efekti
+            if (appState.settings.effects.snow) {
+                createSnowEffect();
+            }
+
+            // Matrix efekti
+            if (appState.settings.effects.matrix) {
+                createMatrixEffect();
+            }
+
+            // Yıldız efekti
+            if (appState.settings.effects.stars) {
+                createStarsEffect();
+            }
+
+            // Partikül efekti
+            if (appState.settings.effects.particles) {
+                createParticlesEffect();
+            }
+
+            // Baloncuk efekti
+            if (appState.settings.effects.bubbles) {
+                createBubblesEffect();
+            }
+
+            // Yağmur efekti
+            if (appState.settings.effects.rain) {
+                createRainEffect();
+            }
+
+            // Konfeti efekti
+            if (appState.settings.effects.confetti) {
+                createConfettiEffect();
             }
         }
 
-        function initMatrix() {
+        // Kar efekti oluştur
+        function createSnowEffect() {
+            effectElements.snow.style.display = 'block';
+            for (let i = 0; i < 100; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                snowflake.style.animationDelay = Math.random() * 5 + 's';
+                snowflake.style.opacity = Math.random() * 0.7 + 0.3;
+                effectElements.snow.appendChild(snowflake);
+            }
+        }
+
+        // Matrix efekti oluştur
+        function createMatrixEffect() {
+            effectElements.matrix.style.display = 'block';
             const canvas = document.getElementById('matrixCanvas');
             const ctx = canvas.getContext('2d');
             
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             
-            const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const chars = "01";
+            const charArray = chars.split("");
             const fontSize = 14;
             const columns = canvas.width / fontSize;
             const drops = [];
             
             for (let i = 0; i < columns; i++) {
-                drops[i] = Math.random() * -100;
+                drops[i] = 1;
             }
             
             function draw() {
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillStyle = "rgba(0, 0, 0, 0.04)";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 
-                ctx.fillStyle = '#0F0';
-                ctx.font = fontSize + 'px monospace';
+                ctx.fillStyle = "#0F0";
+                ctx.font = fontSize + "px monospace";
                 
                 for (let i = 0; i < drops.length; i++) {
-                    const text = chars[Math.floor(Math.random() * chars.length)];
+                    const text = charArray[Math.floor(Math.random() * charArray.length)];
                     ctx.fillText(text, i * fontSize, drops[i] * fontSize);
                     
                     if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
@@ -1861,494 +2050,387 @@
             }
             
             setInterval(draw, 33);
+        }
+
+        // Yıldız efekti oluştur
+        function createStarsEffect() {
+            effectElements.stars.style.display = 'block';
+            for (let i = 0; i < 150; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.animationDuration = (Math.random() * 3 + 1) + 's';
+                star.style.animationDelay = Math.random() * 5 + 's';
+                effectElements.stars.appendChild(star);
+            }
+        }
+
+        // Partikül efekti oluştur
+        function createParticlesEffect() {
+            effectElements.particles.style.display = 'block';
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDuration = (Math.random() * 10 + 5) + 's';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                effectElements.particles.appendChild(particle);
+            }
+        }
+
+        // Baloncuk efekti oluştur
+        function createBubblesEffect() {
+            effectElements.bubbles.style.display = 'block';
+            for (let i = 0; i < 20; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                const size = Math.random() * 60 + 20;
+                bubble.style.width = size + 'px';
+                bubble.style.height = size + 'px';
+                bubble.style.left = Math.random() * 100 + 'vw';
+                bubble.style.animationDuration = (Math.random() * 20 + 10) + 's';
+                bubble.style.animationDelay = Math.random() * 5 + 's';
+                effectElements.bubbles.appendChild(bubble);
+            }
+        }
+
+        // Yağmur efekti oluştur
+        function createRainEffect() {
+            effectElements.rain.style.display = 'block';
+            for (let i = 0; i < 100; i++) {
+                const raindrop = document.createElement('div');
+                raindrop.className = 'raindrop';
+                raindrop.style.left = Math.random() * 100 + 'vw';
+                raindrop.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
+                raindrop.style.animationDelay = Math.random() * 5 + 's';
+                effectElements.rain.appendChild(raindrop);
+            }
+        }
+
+        // Konfeti efekti oluştur
+        function createConfettiEffect() {
+            effectElements.confetti.style.display = 'block';
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                confetti.style.animationDelay = Math.random() * 5 + 's';
+                effectElements.confetti.appendChild(confetti);
+            }
+        }
+
+        // Ses ikonunu güncelle
+        function updateVolumeIcon(volume) {
+            let iconPath;
+            if (volume === 0) {
+                iconPath = "M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z";
+            } else if (volume < 0.5) {
+                iconPath = "M18.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM5 9v6h4l5 5V4L9 9H5z";
+            } else {
+                iconPath = "M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z";
+            }
             
-            window.addEventListener('resize', () => {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
+            elements.volumeIcon.innerHTML = `<svg viewBox="0 0 24 24"><path d="${iconPath}"></path></svg>`;
+        }
+
+        // UI'ı güncelle
+        function updateUI() {
+            // Kullanıcı adı
+            elements.username.textContent = appState.settings.username;
+            
+            // Kullanıcı adı stili
+            elements.username.className = 'username';
+            if (appState.settings.usernameStyle !== 'normal') {
+                elements.username.classList.add(appState.settings.usernameStyle);
+            }
+            
+            // Başlık
+            elements.title.textContent = appState.settings.title;
+            
+            // Durum
+            elements.statusText.textContent = appState.settings.status;
+            
+            // Arkaplan
+            updateBackground();
+            
+            // Sosyal medya bağlantıları
+            updateSocialLinks();
+            
+            // Bilgi kartları
+            updateInfoCards();
+        }
+
+        // Arkaplanı güncelle
+        function updateBackground() {
+            const bg = appState.settings.background;
+            
+            switch (bg.type) {
+                case 'image':
+                    if (bg.imageUrl) {
+                        elements.backgroundImage.src = bg.imageUrl;
+                        elements.backgroundImage.style.display = 'block';
+                        elements.backgroundVideo.style.display = 'none';
+                    }
+                    break;
+                case 'video':
+                    if (bg.videoUrl) {
+                        elements.backgroundVideo.src = bg.videoUrl;
+                        elements.backgroundVideo.style.display = 'block';
+                        elements.backgroundImage.style.display = 'none';
+                        elements.backgroundVideo.play();
+                    }
+                    break;
+                case 'color':
+                    elements.background.style.backgroundColor = bg.color;
+                    elements.backgroundImage.style.display = 'none';
+                    elements.backgroundVideo.style.display = 'none';
+                    break;
+            }
+        }
+
+        // Sosyal medya bağlantılarını güncelle
+        function updateSocialLinks() {
+            elements.socialLinks.innerHTML = '';
+            const social = appState.settings.social;
+            
+            const platforms = [
+                { key: 'instagram', name: 'Instagram', icon: 'https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/instagram.svg' },
+                { key: 'twitter', name: 'Twitter', icon: 'https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/twitter.svg' },
+                { key: 'github', name: 'GitHub', icon: 'https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/github.svg' },
+                { key: 'discord', name: 'Discord', icon: 'https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/discord.svg' },
+                { key: 'spotify', name: 'Spotify', icon: 'https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/spotify.svg' }
+            ];
+            
+            platforms.forEach(platform => {
+                if (social[platform.key]) {
+                    const link = document.createElement('a');
+                    link.className = 'social-icon';
+                    link.href = social[platform.key];
+                    link.target = '_blank';
+                    link.innerHTML = `<img src="${platform.icon}" alt="${platform.name}">`;
+                    elements.socialLinks.appendChild(link);
+                }
             });
         }
 
-        function createStars() {
-            const container = document.getElementById('starsEffect');
-            container.innerHTML = '';
-            const starCount = 100;
+        // Bilgi kartlarını güncelle
+        function updateInfoCards() {
+            elements.infoCards.innerHTML = '';
+            const cards = appState.settings.infoCards;
             
-            for (let i = 0; i < starCount; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                star.style.animationDelay = Math.random() * 3 + 's';
-                container.appendChild(star);
-            }
+            Object.keys(cards).forEach((key, index) => {
+                const card = cards[key];
+                const cardElement = document.createElement('div');
+                cardElement.className = 'info-card';
+                cardElement.innerHTML = `
+                    <div class="card-header">
+                        <div class="card-icon">📄</div>
+                        <div class="card-title">${card.title}</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-info">
+                            <div class="card-primary">${card.content}</div>
+                        </div>
+                    </div>
+                `;
+                elements.infoCards.appendChild(cardElement);
+            });
         }
 
-        function createParticles() {
-            const container = document.getElementById('particlesEffect');
-            container.innerHTML = '';
-            const particleCount = 50;
+        // Admin ayarlarını yükle
+        function loadAdminSettings() {
+            const settings = appState.settings;
             
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDuration = (Math.random() * 5 + 5) + 's';
-                particle.style.animationDelay = Math.random() * 5 + 's';
-                container.appendChild(particle);
-            }
+            // Profil ayarları
+            elements.profileUsername.value = settings.username;
+            elements.profileTitle.value = settings.title;
+            elements.profileStatus.value = settings.status;
+            elements.usernameStyle.value = settings.usernameStyle;
+            
+            // Arkaplan ayarları
+            elements.backgroundType.value = settings.background.type;
+            elements.backgroundImageUrl.value = settings.background.imageUrl;
+            elements.backgroundVideoUrl.value = settings.background.videoUrl;
+            elements.backgroundColor.value = settings.background.color;
+            elements.backgroundColorText.value = settings.background.color;
+            
+            // Efekt ayarları
+            elements.snowEffectToggle.checked = settings.effects.snow;
+            elements.matrixEffectToggle.checked = settings.effects.matrix;
+            elements.starsEffectToggle.checked = settings.effects.stars;
+            elements.particlesEffectToggle.checked = settings.effects.particles;
+            elements.bubblesEffectToggle.checked = settings.effects.bubbles;
+            elements.rainEffectToggle.checked = settings.effects.rain;
+            elements.confettiEffectToggle.checked = settings.effects.confetti;
+            
+            // Sosyal medya ayarları
+            elements.socialInstagram.value = settings.social.instagram;
+            elements.socialTwitter.value = settings.social.twitter;
+            elements.socialGithub.value = settings.social.github;
+            elements.socialDiscord.value = settings.social.discord;
+            elements.socialSpotify.value = settings.social.spotify;
+            
+            // Bilgi kartları
+            elements.infoCard1Title.value = settings.infoCards.card1.title;
+            elements.infoCard1Content.value = settings.infoCards.card1.content;
+            elements.infoCard2Title.value = settings.infoCards.card2.title;
+            elements.infoCard2Content.value = settings.infoCards.card2.content;
+            
+            // Arkaplan türüne göre grupları göster/gizle
+            elements.backgroundType.dispatchEvent(new Event('change'));
         }
 
-        function createBubbles() {
-            const container = document.getElementById('bubblesEffect');
-            container.innerHTML = '';
-            const bubbleCount = 30;
+        // YouTube'u MP3'e dönüştür
+        function convertYouTubeToMp3() {
+            const url = elements.youtubeUrl.value.trim();
+            if (!url) return;
             
-            for (let i = 0; i < bubbleCount; i++) {
-                const bubble = document.createElement('div');
-                bubble.className = 'bubble';
-                const size = Math.random() * 40 + 20;
-                bubble.style.width = size + 'px';
-                bubble.style.height = size + 'px';
-                bubble.style.left = Math.random() * 100 + '%';
-                bubble.style.animationDuration = (Math.random() * 5 + 5) + 's';
-                bubble.style.animationDelay = Math.random() * 5 + 's';
-                container.appendChild(bubble);
-            }
+            elements.conversionStatus.className = 'conversion-status processing';
+            elements.conversionStatus.textContent = 'Dönüştürülüyor...';
+            elements.conversionStatus.style.display = 'block';
+            elements.convertBtn.disabled = true;
+            
+            // Burada gerçek bir YouTube dönüştürme API'si entegre edilebilir
+            // Şu an için simüle ediyoruz
+            setTimeout(() => {
+                elements.conversionStatus.className = 'conversion-status success';
+                elements.conversionStatus.textContent = 'Başarıyla dönüştürüldü! MP3 dosyası indirilebilir.';
+                elements.convertBtn.disabled = false;
+                
+                // İndirme linki oluştur (simülasyon)
+                const downloadLink = document.createElement('a');
+                downloadLink.href = '#';
+                downloadLink.textContent = 'MP3\'ü İndir';
+                downloadLink.style.color = '#43b581';
+                downloadLink.style.marginLeft = '10px';
+                downloadLink.onclick = function(e) {
+                    e.preventDefault();
+                    alert('Bu bir demo uygulamasıdır. Gerçek uygulamada MP3 dosyası indirilebilir.');
+                };
+                elements.conversionStatus.appendChild(downloadLink);
+            }, 3000);
         }
 
-        function handleFileUpload(input, type) {
-            const file = input.files[0];
-            if (!file) return;
-
-            const maxSizes = {
-                avatar: 5 * 1024 * 1024,
-                background: 20 * 1024 * 1024,
-                music: 10 * 1024 * 1024,
-                musicCover: 5 * 1024 * 1024,
-                discordAvatar: 5 * 1024 * 1024
-            };
-
-            if (file.size > maxSizes[type]) {
-                alert(`File size exceeds maximum limit of ${maxSizes[type] / (1024 * 1024)}MB`);
-                input.value = '';
+        // Arkaplan dosyasını işle
+        function handleBackgroundFile(file) {
+            if (file.size > 10 * 1024 * 1024) {
+                alert('Dosya boyutu 10MB\'dan küçük olmalıdır.');
                 return;
             }
-
+            
+            const fileType = file.type.split('/')[0];
+            if (fileType !== 'image' && fileType !== 'video') {
+                alert('Sadece resim ve video dosyaları yükleyebilirsiniz.');
+                return;
+            }
+            
+            // Önizleme göster
+            elements.backgroundFileName.textContent = file.name;
+            elements.backgroundFileSize.textContent = (file.size / (1024 * 1024)).toFixed(2) + ' MB';
+            elements.backgroundPreview.classList.add('show');
+            
+            // Dosyayı oku ve URL oluştur
             const reader = new FileReader();
             reader.onload = function(e) {
-                uploadedFiles[type] = e.target.result;
-                showPreview(type, file, e.target.result);
+                const url = e.target.result;
+                
+                if (fileType === 'image') {
+                    appState.settings.background.type = 'image';
+                    appState.settings.background.imageUrl = url;
+                    elements.backgroundType.value = 'image';
+                } else {
+                    appState.settings.background.type = 'video';
+                    appState.settings.background.videoUrl = url;
+                    elements.backgroundType.value = 'video';
+                }
+                
+                elements.backgroundType.dispatchEvent(new Event('change'));
+                updateBackground();
             };
             reader.readAsDataURL(file);
         }
 
-        function showPreview(type, file, dataUrl) {
-            const preview = document.getElementById(`${type}Preview`);
-            const fileName = document.getElementById(`${type}FileName`);
-            const fileSize = document.getElementById(`${type}FileSize`);
-
-            fileName.textContent = file.name;
-            fileSize.textContent = formatFileSize(file.size);
-
-            if (type === 'avatar' || type === 'musicCover' || type === 'discordAvatar') {
-                const img = document.getElementById(`${type}PreviewImg`);
-                img.src = dataUrl;
-            } else if (type === 'background') {
-                const mediaContainer = document.getElementById('backgroundPreviewMedia');
-                mediaContainer.innerHTML = '';
-                
-                if (file.type.startsWith('video/')) {
-                    const video = document.createElement('video');
-                    video.src = dataUrl;
-                    video.style.width = '80px';
-                    video.style.height = '80px';
-                    video.style.objectFit = 'cover';
-                    video.style.borderRadius = '8px';
-                    video.muted = true;
-                    video.loop = true;
-                    video.play();
-                    mediaContainer.appendChild(video);
-                } else {
-                    const img = document.createElement('img');
-                    img.src = dataUrl;
-                    img.style.width = '80px';
-                    img.style.height = '80px';
-                    img.style.objectFit = 'cover';
-                    img.style.borderRadius = '8px';
-                    mediaContainer.appendChild(img);
-                }
-            }
-
-            preview.classList.add('show');
-        }
-
-        function removeUpload(type) {
-            uploadedFiles[type] = null;
-            document.getElementById(`${type}FileInput`).value = '';
-            document.getElementById(`${type}Preview`).classList.remove('show');
-        }
-
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
-        }
-
-        async function convertMusicUrl() {
-            const url = document.getElementById('musicWebsiteUrl').value;
-            const statusDiv = document.getElementById('conversionStatus');
-            const btn = document.getElementById('convertMusicBtn');
+        // Ayarları kaydet
+        function saveSettings() {
+            // Profil ayarları
+            appState.settings.username = elements.profileUsername.value;
+            appState.settings.title = elements.profileTitle.value;
+            appState.settings.status = elements.profileStatus.value;
+            appState.settings.usernameStyle = elements.usernameStyle.value;
             
-            if (!url) {
-                statusDiv.className = 'conversion-status error';
-                statusDiv.textContent = 'Please enter a URL';
-                return;
-            }
-
-            btn.disabled = true;
-            btn.textContent = 'Converting...';
-            statusDiv.className = 'conversion-status';
-            statusDiv.style.display = 'block';
-            statusDiv.textContent = 'Processing...';
-
-            try {
-                // Simulated conversion - in real implementation, you would use an API service
-                // Popular services: yt-dlp, youtube-dl APIs, or third-party conversion services
-                
-                // For demonstration, showing how it would work:
-                statusDiv.className = 'conversion-status error';
-                statusDiv.textContent = 'Music conversion requires a backend service. Please use direct MP3 URL or upload file instead.';
-                
-                // In a real implementation with a backend:
-                // const response = await fetch('/api/convert', {
-                //     method: 'POST',
-                //     headers: { 'Content-Type': 'application/json' },
-                //     body: JSON.stringify({ url: url })
-                // });
-                // const data = await response.json();
-                // if (data.success) {
-                //     document.getElementById('musicUrl').value = data.mp3Url;
-                //     statusDiv.className = 'conversion-status success';
-                //     statusDiv.textContent = 'Converted successfully! MP3 URL added.';
-                // }
-                
-            } catch (error) {
-                statusDiv.className = 'conversion-status error';
-                statusDiv.textContent = 'Conversion failed. Please try a direct MP3 link.';
-            } finally {
-                btn.disabled = false;
-                btn.textContent = 'Convert to MP3';
-            }
+            // Arkaplan ayarları
+            appState.settings.background.type = elements.backgroundType.value;
+            appState.settings.background.imageUrl = elements.backgroundImageUrl.value;
+            appState.settings.background.videoUrl = elements.backgroundVideoUrl.value;
+            appState.settings.background.color = elements.backgroundColor.value;
+            
+            // Efekt ayarları
+            appState.settings.effects.snow = elements.snowEffectToggle.checked;
+            appState.settings.effects.matrix = elements.matrixEffectToggle.checked;
+            appState.settings.effects.stars = elements.starsEffectToggle.checked;
+            appState.settings.effects.particles = elements.particlesEffectToggle.checked;
+            appState.settings.effects.bubbles = elements.bubblesEffectToggle.checked;
+            appState.settings.effects.rain = elements.rainEffectToggle.checked;
+            appState.settings.effects.confetti = elements.confettiEffectToggle.checked;
+            
+            // Sosyal medya ayarları
+            appState.settings.social.instagram = elements.socialInstagram.value;
+            appState.settings.social.twitter = elements.socialTwitter.value;
+            appState.settings.social.github = elements.socialGithub.value;
+            appState.settings.social.discord = elements.socialDiscord.value;
+            appState.settings.social.spotify = elements.socialSpotify.value;
+            
+            // Bilgi kartları
+            appState.settings.infoCards.card1.title = elements.infoCard1Title.value;
+            appState.settings.infoCards.card1.content = elements.infoCard1Content.value;
+            appState.settings.infoCards.card2.title = elements.infoCard2Title.value;
+            appState.settings.infoCards.card2.content = elements.infoCard2Content.value;
+            
+            // UI'ı güncelle
+            updateUI();
+            
+            // Efektleri yeniden başlat
+            restartEffects();
+            
+            // Ayarları localStorage'a kaydet
+            localStorage.setItem('profileSettings', JSON.stringify(appState.settings));
+            
+            alert('Ayarlar başarıyla kaydedildi!');
         }
 
-        function setupDragAndDrop() {
-            const areas = ['avatar', 'background', 'music', 'musicCover', 'discordAvatar'];
-            
-            areas.forEach(type => {
-                const area = document.getElementById(`${type}UploadArea`);
-                if (!area) return;
-
-                area.addEventListener('dragover', (e) => {
-                    e.preventDefault();
-                    area.classList.add('dragover');
-                });
-
-                area.addEventListener('dragleave', () => {
-                    area.classList.remove('dragover');
-                });
-
-                area.addEventListener('drop', (e) => {
-                    e.preventDefault();
-                    area.classList.remove('dragover');
-                    
-                    const files = e.dataTransfer.files;
-                    if (files.length > 0) {
-                        const input = document.getElementById(`${type}FileInput`);
-                        input.files = files;
-                        handleFileUpload(input, type);
-                    }
-                });
+        // Efektleri yeniden başlat
+        function restartEffects() {
+            // Tüm efektleri temizle
+            Object.values(effectElements).forEach(element => {
+                element.innerHTML = '';
+                element.style.display = 'none';
             });
+            
+            // Etkin efektleri yeniden oluştur
+            initializeEffects();
         }
 
-        function checkRoute() {
-            const path = window.location.pathname;
-            if (path === '/panel' || path === '/panel.html' || window.location.hash === '#panel') {
-                document.getElementById('adminPanel').classList.add('active');
-                document.getElementById('mainContainer').style.display = 'none';
-                document.getElementById('enterOverlay').style.display = 'none';
-                document.getElementById('volumeControl').style.display = 'none';
+        // Ayarları yükle
+        function loadSettings() {
+            const savedSettings = localStorage.getItem('profileSettings');
+            if (savedSettings) {
+                appState.settings = JSON.parse(savedSettings);
             }
         }
 
-        function login(event) {
-            event.preventDefault();
-            const password = document.getElementById('passwordInput').value;
-            
-            if (password === ADMIN_PASSWORD) {
-                document.getElementById('loginContainer').style.display = 'none';
-                document.getElementById('panelContainer').classList.add('active');
-                document.getElementById('errorMessage').style.display = 'none';
-                loadPanelValues();
-            } else {
-                document.getElementById('errorMessage').style.display = 'block';
+        // Pencere boyutu değiştiğinde
+        window.addEventListener('resize', function() {
+            // Canvas'ı yeniden boyutlandır
+            const matrixCanvas = document.getElementById('matrixCanvas');
+            if (matrixCanvas) {
+                matrixCanvas.width = window.innerWidth;
+                matrixCanvas.height = window.innerHeight;
             }
-        }
-
-        function logout() {
-            document.getElementById('loginContainer').style.display = 'block';
-            document.getElementById('panelContainer').classList.remove('active');
-            document.getElementById('passwordInput').value = '';
-        }
-
-        function loadPanelValues() {
-            document.getElementById('avatarUrl').value = settings.profile.avatar;
-            document.getElementById('usernameInput').value = settings.profile.username;
-            document.getElementById('titleInput').value = settings.profile.title;
-            document.getElementById('statusTextInput').value = settings.profile.statusText;
-            document.getElementById('statusColor').value = settings.profile.statusColor;
-            document.getElementById('nameGlowing').checked = settings.profile.nameGlowing || false;
-            document.getElementById('nameGradient').checked = settings.profile.nameGradient || false;
-            document.getElementById('nameRainbow').checked = settings.profile.nameRainbow || false;
-
-            document.getElementById('backgroundUrl').value = settings.background.url;
-            document.getElementById('backgroundOpacity').value = settings.background.opacity;
-            document.getElementById('snowEffect').checked = settings.background.snowEffect;
-            document.getElementById('matrixEffectToggle').checked = settings.background.matrixEffect || false;
-            document.getElementById('starsEffectToggle').checked = settings.background.starsEffect || false;
-            document.getElementById('particlesEffectToggle').checked = settings.background.particlesEffect || false;
-            document.getElementById('bubblesEffectToggle').checked = settings.background.bubblesEffect || false;
-
-            document.getElementById('musicUrl').value = settings.music.url;
-            document.getElementById('musicVolume').value = settings.music.volume;
-            document.getElementById('musicCardTitle').value = settings.music.cardTitle;
-            document.getElementById('musicCoverUrl').value = settings.music.coverUrl;
-
-            document.getElementById('spotifyLink').value = settings.social.spotify;
-            document.getElementById('discordLink').value = settings.social.discord;
-            document.getElementById('youtubeLink').value = settings.social.youtube;
-            document.getElementById('githubLink').value = settings.social.github;
-
-            document.getElementById('discordAvatarUrl').value = settings.discordCard.avatar;
-            document.getElementById('discordUsernameInput').value = settings.discordCard.username;
-            document.getElementById('discordStatusInput').value = settings.discordCard.status;
-
-            document.getElementById('enterLogoInput').value = settings.enterScreen.logoText;
-            
-            if (settings.advanced) {
-                document.getElementById('faviconUrl').value = settings.advanced.faviconUrl || '';
-                document.getElementById('pageTitle').value = settings.advanced.pageTitle || 'dengehh';
-                document.getElementById('avatarBorderColor').value = settings.advanced.avatarBorderColor || '#ffffff';
-                document.getElementById('animationSpeed').value = settings.advanced.animationSpeed || 'normal';
-            }
-        }
-
-        function saveProfileSettings() {
-            if (uploadedFiles.avatar) {
-                settings.profile.avatar = uploadedFiles.avatar;
-            } else if (document.getElementById('avatarUrl').value) {
-                settings.profile.avatar = document.getElementById('avatarUrl').value;
-            }
-            
-            settings.profile.username = document.getElementById('usernameInput').value || settings.profile.username;
-            settings.profile.title = document.getElementById('titleInput').value || settings.profile.title;
-            settings.profile.statusText = document.getElementById('statusTextInput').value || settings.profile.statusText;
-            settings.profile.statusColor = document.getElementById('statusColor').value;
-            settings.profile.nameGlowing = document.getElementById('nameGlowing').checked;
-            settings.profile.nameGradient = document.getElementById('nameGradient').checked;
-            settings.profile.nameRainbow = document.getElementById('nameRainbow').checked;
-            
-            saveSettings();
-            applySettings();
-            alert('Profile settings saved successfully!');
-        }
-
-        function saveBackgroundSettings() {
-            if (uploadedFiles.background) {
-                settings.background.url = uploadedFiles.background;
-            } else if (document.getElementById('backgroundUrl').value) {
-                settings.background.url = document.getElementById('backgroundUrl').value;
-            }
-            
-            settings.background.opacity = parseInt(document.getElementById('backgroundOpacity').value) || 15;
-            settings.background.snowEffect = document.getElementById('snowEffect').checked;
-            settings.background.matrixEffect = document.getElementById('matrixEffectToggle').checked;
-            settings.background.starsEffect = document.getElementById('starsEffectToggle').checked;
-            settings.background.particlesEffect = document.getElementById('particlesEffectToggle').checked;
-            settings.background.bubblesEffect = document.getElementById('bubblesEffectToggle').checked;
-            
-            saveSettings();
-            applySettings();
-            alert('Background settings saved successfully!');
-        }
-
-        function saveMusicSettings() {
-            if (uploadedFiles.music) {
-                settings.music.url = uploadedFiles.music;
-            } else if (document.getElementById('musicUrl').value) {
-                settings.music.url = document.getElementById('musicUrl').value;
-            }
-            
-            if (uploadedFiles.musicCover) {
-                settings.music.coverUrl = uploadedFiles.musicCover;
-            } else if (document.getElementById('musicCoverUrl').value) {
-                settings.music.coverUrl = document.getElementById('musicCoverUrl').value;
-            }
-            
-            settings.music.volume = parseInt(document.getElementById('musicVolume').value) || 25;
-            settings.music.cardTitle = document.getElementById('musicCardTitle').value || settings.music.cardTitle;
-            
-            saveSettings();
-            applySettings();
-            alert('Music settings saved successfully!');
-        }
-
-        function saveSocialLinks() {
-            settings.social.spotify = document.getElementById('spotifyLink').value || settings.social.spotify;
-            settings.social.discord = document.getElementById('discordLink').value || settings.social.discord;
-            settings.social.youtube = document.getElementById('youtubeLink').value;
-            settings.social.github = document.getElementById('githubLink').value;
-            
-            saveSettings();
-            alert('Social links saved successfully!');
-        }
-
-        function saveDiscordSettings() {
-            if (uploadedFiles.discordAvatar) {
-                settings.discordCard.avatar = uploadedFiles.discordAvatar;
-            } else if (document.getElementById('discordAvatarUrl').value) {
-                settings.discordCard.avatar = document.getElementById('discordAvatarUrl').value;
-            }
-            
-            settings.discordCard.username = document.getElementById('discordUsernameInput').value || settings.discordCard.username;
-            settings.discordCard.status = document.getElementById('discordStatusInput').value || settings.discordCard.status;
-            
-            saveSettings();
-            applySettings();
-            alert('Discord card settings saved successfully!');
-        }
-
-        function saveEnterSettings() {
-            settings.enterScreen.logoText = document.getElementById('enterLogoInput').value || settings.enterScreen.logoText;
-            
-            saveSettings();
-            applySettings();
-            alert('Enter screen settings saved successfully!');
-        }
-
-        function saveAdvancedSettings() {
-            if (!settings.advanced) {
-                settings.advanced = {};
-            }
-            
-            settings.advanced.faviconUrl = document.getElementById('faviconUrl').value;
-            settings.advanced.pageTitle = document.getElementById('pageTitle').value || 'dengehh';
-            settings.advanced.avatarBorderColor = document.getElementById('avatarBorderColor').value;
-            settings.advanced.animationSpeed = document.getElementById('animationSpeed').value;
-            
-            saveSettings();
-            applySettings();
-            alert('Advanced settings saved successfully! Refresh page to see all changes.');
-        }
-
-        function createSnow() {
-            const snow = document.getElementById('snow');
-            const snowflakeCount = 100;
-            
-            for (let i = 0; i < snowflakeCount; i++) {
-                const snowflake = document.createElement('div');
-                snowflake.className = 'snowflake';
-                snowflake.style.left = Math.random() * 100 + '%';
-                snowflake.style.animationDuration = (Math.random() * 3 + 4) + 's';
-                snowflake.style.animationDelay = Math.random() * 5 + 's';
-                snowflake.style.opacity = Math.random() * 0.6 + 0.3;
-                snow.appendChild(snowflake);
-            }
-        }
-
-        function enter() {
-            const overlay = document.getElementById('enterOverlay');
-            const main = document.getElementById('mainContainer');
-            const audio = document.getElementById('bgAudio');
-            
-            overlay.classList.add('hidden');
-            
-            setTimeout(() => {
-                main.classList.add('visible');
-                audio.volume = settings.music.volume / 100;
-                audio.play().catch(e => console.log('Audio autoplay prevented'));
-            }, 500);
-        }
-
-        const volumeControl = document.getElementById('volumeControl');
-        let isExpanded = false;
-
-        volumeControl.addEventListener('click', function(e) {
-            if (!isExpanded && (e.target === volumeControl || e.target.closest('.volume-icon'))) {
-                isExpanded = true;
-                volumeControl.classList.add('expanded');
-            }
-        });
-
-        document.addEventListener('click', function(e) {
-            if (isExpanded && !volumeControl.contains(e.target)) {
-                isExpanded = false;
-                volumeControl.classList.remove('expanded');
-            }
-        });
-
-        const audio = document.getElementById('bgAudio');
-        const volumeSlider = document.getElementById('volumeSlider');
-        const volumeIcon = document.getElementById('volumeIcon');
-        let isMuted = false;
-
-        volumeSlider.addEventListener('input', function(e) {
-            e.stopPropagation();
-            audio.volume = this.value / 100;
-            updateVolumeIcon();
-        });
-
-        volumeSlider.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
-
-        function toggleMute() {
-            isMuted = !isMuted;
-            audio.muted = isMuted;
-            updateVolumeIcon();
-        }
-
-        function updateVolumeIcon() {
-            const icon = volumeIcon.querySelector('svg path');
-            if (isMuted || audio.volume === 0) {
-                icon.setAttribute('d', 'M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z');
-            } else {
-                icon.setAttribute('d', 'M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z');
-            }
-        }
-
-        function openLink(platform) {
-            const links = {
-                spotify: settings.social.spotify,
-                github: settings.social.github,
-                youtube: settings.social.youtube,
-                discord: settings.social.discord
-            };
-            
-            if (links[platform]) {
-                window.open(links[platform], '_blank');
-            }
-        }
-
-        window.addEventListener('load', () => {
-            loadSettings();
-            checkRoute();
-            createSnow();
-            setupDragAndDrop();
         });
     </script>
 </body>
-</html> 
+</html>
